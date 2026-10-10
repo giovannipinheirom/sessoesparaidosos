@@ -467,7 +467,7 @@ const toast = document.getElementById('toast'); let tt;
 function aviso(t){ toast.textContent = t; toast.hidden = false; clearTimeout(tt); tt = setTimeout(() => toast.hidden = true, 3200); }
 document.querySelectorAll('[data-checkout]').forEach(el => el.addEventListener('click', e => {
   const k = el.dataset.checkout, url = CHECKOUT[k];
-  if (url) { location.href = url; return; }
+  if (url) { const q = location.search.slice(1); location.href = q ? url + (url.includes("?") ? "&" : "?") + q : url; return; }
   e.preventDefault();
   aviso('Prévia: aqui abre o checkout Cakto do ' + ({basico:'Básico (R$ 12)', completo:'Completo (R$ 22)', completo_popup:'Completo com desconto (R$ 17)'}[k]) + '.');
 }));
